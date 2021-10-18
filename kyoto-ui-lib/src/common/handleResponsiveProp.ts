@@ -1,6 +1,9 @@
 import { isEmpty, isBoolean, isPlainObject, reduce } from 'lodash';
 
-const handleResponsiveProp = (prefix, values) => {
+const handleResponsiveProp = (
+  prefix: string,
+  values: boolean | Record<string, string | boolean>
+): Record<string, boolean> => {
   if (isPlainObject(values)) {
     return reduce(
       values,
@@ -8,15 +11,14 @@ const handleResponsiveProp = (prefix, values) => {
         if (isBoolean(value)) {
           return {
             ...acc,
-            [`${key === 'default' ? '' : `${key}-`}${prefix}`]: value
+            [`${key === 'default' ? '' : `${key}-`}${prefix}`]: value,
           };
         }
 
         return {
           ...acc,
-          [`${key === 'default' ? '' : `${key}-`}${prefix}${value}`]: !isEmpty(
-            value
-          )
+          [`${key === 'default' ? '' : `${key}-`}${prefix}${value}`]:
+            !isEmpty(value),
         };
       },
       {}
@@ -25,12 +27,12 @@ const handleResponsiveProp = (prefix, values) => {
 
   if (isBoolean(values)) {
     return {
-      [`${prefix}`]: values
+      [`${prefix}`]: !!values,
     };
   }
 
   return {
-    [`${prefix}${values}`]: !isEmpty(values)
+    [`${prefix}${values}`]: !isEmpty(values),
   };
 };
 
