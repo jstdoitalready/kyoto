@@ -9,7 +9,7 @@
     "test:e2e": "vue-cli-service test:e2e",
     "lint": "vue-cli-service lint"
   },
-  "main": "./dist/kyoto.common.js",
+  "main": "./dist/kyoto.umd.js",
   "dependencies": {
     "core-js": "3.18.3",
     "vue": "3.2.20"
